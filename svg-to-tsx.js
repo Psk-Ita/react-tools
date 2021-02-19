@@ -72,9 +72,6 @@ ${componentCode}
     );
     _exports.push(componentName);
     _includes.push(`import ${capitalize(componentName)} from './${componentName}'`);
-    if (idx > 0) {
-        return;
-    }
 });
 
 // create index for svg-images
