@@ -11,11 +11,12 @@ export const usePrevious = <T>(value?: T): T | undefined => {
 
 
 /* usage
-    const currentValue = useSelector(...) /* selector, props, components state */ ;
+    // selector, props, components state
+    const currentValue = useSelector(...) ;
     const previousValue = usePrevious(currentValue);
 
     useEffect(() => {
-      /* standard or custom equality comparer */ 
+      // standard or custom equality comparer
       if(currentValue !== previousValue){
         // code to execute when currentValue changes
       }
