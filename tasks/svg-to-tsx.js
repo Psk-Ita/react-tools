@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 
-const ICONS_SOURCE_DIR = './../src-svg';
-const COMPONENTS_DIR = 'src/components/svg-images';
+const ICONS_SOURCE_DIR = 'tasks/src-svg';
+const COMPONENTS_DIR = 'src/images';
 
 const _options = [];
 const _exports = [];
@@ -95,24 +95,24 @@ ${_includes.join(`;
 `)};
 
 //* eslint-disable @typescript-eslint/camelcase */
-export enum UCIcons {
+export enum MyImagesEnum {
     ${_options.map((x) => `${clean(x)} = "${x}",`).join(`
     `)}
 };
 //* eslint-enable @typescript-eslint/camelcase */
-export interface UCIconProps extends React.SVGProps<SVGSVGElement | HTMLImageElement> {
-    icon: UCIcons;
+export interface MyImageProps extends React.SVGProps<SVGSVGElement | HTMLImageElement> {
+    imageId: MyImagesEnum;
 }
 
-export const UCIcon = (props: UCIconProps): JSX.Element => {
-    const { icon, ...oth } = props;
+export const MyImage = (props: MyImageProps): JSX.Element => {
+    const { imageId, ...oth } = props;
     let result = <React.Fragment />;
-    switch (icon) {
+    switch (imageId) {
         ${_options.map((x) => {
           let props = `(oth as React.SVGProps<${
             images.indexOf(`${ICONS_SOURCE_DIR}/${x}.png`) < 0 ? 'SVGSVGElement' : 'HTMLImageElement'
           }>)`;
-          return `case UCIcons.${clean(x)}: {
+          return `case MyImagesEnum.${clean(x)}: {
             result = <${camelize(x)} {...${props}} />;
             break;
         }`;
@@ -122,7 +122,7 @@ export const UCIcon = (props: UCIconProps): JSX.Element => {
     return result;
 };
 
-export default {UCIcon, UCIcons, ${_exports.join(`,
+export default {MyImage, MyImagesEnum, ${_exports.join(`,
     `)},};
 `,
   function (err) {
@@ -133,16 +133,16 @@ export default {UCIcon, UCIcons, ${_exports.join(`,
 // create test for index
 fs.writeFile(
   `${COMPONENTS_DIR}/index.test.tsx`,
-  `import { UCIcon, UCIcons } from './';
-import React from 'react'; import Enzyme, { mount } from 'enzyme'; import Adapter from '@wojtekmaj/enzyme-adapter-react-17'; Enzyme.configure({ adapter: new Adapter() });
-describe('UCIcon', () => {
+  `import { MyImage, MyImagesEnum } from './';
+import React from "react"; import {render} from '@testing-library/react';
+describe('MyImage', () => {
     it.each\`
-        icon
-        ${_options.map((x) => '${UCIcons.' + clean(x) + '}').join(`
+    imageId
+        ${_options.map((x) => '${MyImagesEnum.' + clean(x) + '}').join(`
         `)}
-    \`('$icon should match the snapshot', ({ icon }) => {
-        const wrapper = mount(<UCIcon id={icon} icon={icon} height={'32px'} width={'32px'} />);
-        expect(wrapper.html()).toMatchSnapshot(icon);
+    \`('$imageId should match the snapshot', ({ imageId }) => {
+        const {baseElement} = render(<MyImage id={imageId} imageId={imageId} height={'32px'} width={'32px'} />);
+        expect(baseElement).toMatchSnapshot(imageId);
     });
 });
 `,
