@@ -51,3 +51,9 @@ export const useWebFont = ({ baseUrl, fontName, fontFamily, setDefault }: WebFon
 html, body { font-family: '${fontFamily}'; font-style: normal; }`);
   }
 };
+
+
+
+/* usage
+  useWebFont({ fontFamily: "Roboto", fontName: "Roboto", baseUrl: "https://en.bestfonts.pro/public/fonts", setDefault: true });
+*/
