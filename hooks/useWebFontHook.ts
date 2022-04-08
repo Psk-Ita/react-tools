@@ -3,11 +3,13 @@ export interface WebFontProps {
   fontName: String;         // file name used to load font resource
   fontFamily: String;       // css name reference
   isDefault?: boolean;      // used as font-family for html and body 
-  hasVariations?: boolean;  // includes a ingle reference or the whole package
+  ignoreStyles?: boolean;   // specify to load or not font variations
 }
 
-export const useWebFont = ({ baseUrl, fontName, fontFamily, isDefault, hasVariations }: WebFontProps): void => {
-  const fontDefinition = hasVariations ? `
+export const useWebFont = ({ baseUrl, fontName, fontFamily, isDefault, ignoreStyles }: WebFontProps): void => {
+  const fontDefinition = ignoreStyles ? `
+@font-face { font-family: "${fontFamily}"; src: local("${fontFamily}"), local("${fontName}"), url("${baseUrl}/${fontName}.woff2") format("woff2"), url("${baseUrl}/${fontName}.woff") format("woff"); font-weight: normal; font-style: normal; }
+`:`
 @font-face { font-family: "${fontFamily}"; src: local("${fontFamily} Bold"), local("${fontName}-Bold"), url("${baseUrl}/${fontName}-Bold.woff2") format("woff2"), url("${baseUrl}/${fontName}-Bold.woff") format("woff"); font-weight: bold; font-style: normal; }
 @font-face { font-family: "${fontFamily}"; src: local("${fontFamily} Black"), local("${fontName}-Black"), url("${baseUrl}/${fontName}-Black.woff2") format("woff2"), url("${baseUrl}/${fontName}-Black.woff") format("woff"); font-weight: 900; font-style: normal; }
 @font-face { font-family: "${fontFamily}"; src: local("${fontFamily} Light"), local("${fontName}-Light"), url("${baseUrl}/${fontName}-Light.woff2") format("woff2"), url("${baseUrl}/${fontName}-Light.woff") format("woff"); font-weight: 300; font-style: normal; }
@@ -19,11 +21,9 @@ export const useWebFont = ({ baseUrl, fontName, fontFamily, isDefault, hasVariat
 @font-face { font-family: "${fontFamily}"; src: local("${fontFamily} Light Italic"), local("${fontName}-LightItalic"), url("${baseUrl}/${fontName}-LightItalic.woff2") format("woff2"), url("${baseUrl}/${fontName}-LightItalic.woff") format("woff"); font-weight: 300; font-style: italic; }
 @font-face { font-family: "${fontFamily}"; src: local("${fontFamily} SemiBold Italic"), local("${fontName}-SemiBoldItalic"), url("${baseUrl}/${fontName}-SemiBoldItalic.woff2") format("woff2"), url("${baseUrl}/${fontName}-SemiBoldItalic.woff") format("woff"); font-weight: 600; font-style: italic; }
 @font-face { font-family: "${fontFamily}"; src: local("${fontFamily} ExtraLight Italic"), local("${fontName}-ExtraLightItalic"), url("${baseUrl}/${fontName}-ExtraLightItalic.woff2") format("woff2"), url("${baseUrl}/${fontName}-ExtraLightItalic.woff") format("woff"); font-weight: 200; font-style: italic; }
-`: `
-@font-face { font-family: "${fontFamily}"; src: local("${fontFamily}"), local("${fontName}"), url("${baseUrl}/${fontName}.woff2") format("woff2"), url("${baseUrl}/${fontName}.woff") format("woff"); font-weight: normal; font-style: normal; }
 `;
 
-  const cssId = `My-${fontName}-Font`;
+  const cssId = `EFC-${fontName}-Font`;
   let domCss = document.getElementById(cssId);
   if (!domCss) {
     domCss = document.createElement("style");
@@ -34,7 +34,7 @@ export const useWebFont = ({ baseUrl, fontName, fontFamily, isDefault, hasVariat
 
   if (isDefault) {
     ["woff2", "woff"].forEach((format: string) => {
-      const linkId = `My-${fontName}-${format}-Preload`;
+      const linkId = `EFC-${fontName}-${format}-Preload`;
 
       let domLink = document.getElementById(linkId);
       if (!domLink) {
@@ -46,7 +46,7 @@ export const useWebFont = ({ baseUrl, fontName, fontFamily, isDefault, hasVariat
       if (domLink instanceof HTMLLinkElement) {
         domLink["as"] = "style";
         domLink["rel"] = "preload";
-        domLink["href"] = `${baseUrl}/${fontName}${hasVariations ? '-Regular' :''}.${format}`;
+        domLink["href"] = `${baseUrl}/${fontName}${ignoreStyles ? '':'-Regular'}.${format}`;
       }
     });
 
@@ -56,5 +56,5 @@ html, body { font-family: '${fontFamily}'; font-style: normal; }`);
 };
 
 /* usage
-  useWebFont({ fontFamily: "Sansation", fontName: "0230a71f60ccd179297f937585f315e4", baseUrl: "//db.onlinewebfonts.com/t", isDefault: true, hasVariations: false });
+  useWebFont({ fontFamily: "Sansation", fontName: "0230a71f60ccd179297f937585f315e4", baseUrl: "//db.onlinewebfonts.com/t", isDefault: true, ignoreStyles: true });
 */
