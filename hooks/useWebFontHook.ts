@@ -41,7 +41,7 @@ export const useWebFont = (props: WebFontProps[]): void => {
       ] = `@font-face { font-family: "${fontFamily}"; src: local("${fontFamily}"), local("${fontName}${fontStyleIn}"), url("${baseUrl}/${fontName}${fontStyleIn}.woff2") format("woff2"), url("${baseUrl}/${fontName}${fontStyleIn}.woff") format("woff"); font-weight: normal; font-style: ${fontStyleOut}; }`;
     }
 
-    const cssId = `${isDefault ? 'DEF' : 'EFC'}-${uid}-Font`;
+    const cssId = `${isDefault ? 'DEF' : 'PSK'}-${uid}-Font`;
     let domCss = document.getElementById(cssId);
     if (!domCss) {
       domCss = document.createElement('style');
