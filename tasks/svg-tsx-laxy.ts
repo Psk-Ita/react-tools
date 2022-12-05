@@ -102,16 +102,16 @@ ${_includes.join(`;
 `)};
 
 //* eslint-disable @typescript-eslint/camelcase */
-export enum MYIcons {
+export enum MyImages {
     ${_options.map((x) => `${clean(x)} = "${x}",`).join(`
     `)}
 };
 //* eslint-enable @typescript-eslint/camelcase */
-export interface MYIconProps extends React.SVGProps<SVGSVGElement | HTMLImageElement> {
-    icon: MYIcons;
+export interface MyImageProps extends React.SVGProps<SVGSVGElement | HTMLImageElement> {
+    icon: MyImages;
 }
 
-export const MYIcon = (props: MYIconProps): JSX.Element => {
+export const MyImage = (props: MyImageProps): JSX.Element => {
     const { icon, ...oth } = props;
 
     const capitalize = (input:string): string => {
@@ -138,7 +138,7 @@ export const MYIcon = (props: MYIconProps): JSX.Element => {
     );
 };
 
-export default {MYIcon, MYIcons, ${_exports.join(`,
+export default {MyImage, MyImages, ${_exports.join(`,
     `)},};
 `,
   function (err) {
@@ -149,12 +149,12 @@ export default {MYIcon, MYIcons, ${_exports.join(`,
 // create test for index
 fs.writeFile(
   `${COMPONENTS_DIR}/index.test.tsx`,
-  `import { MYIcon, MYIcons } from './';
-   import React from 'react'; import { render } from '@testing-library/react'; describe('MYIcon', () => {
+  `import { MyImage, MyImages } from './';
+   import React from 'react'; import { render } from '@testing-library/react'; describe('MyImage', () => {
     it.each\`
-      icon${_options.map((x) => '${MYIcons.' + clean(x) + '}').join(`
+      icon${_options.map((x) => '${MyImages.' + clean(x) + '}').join(`
 `)}\`('$icon should match the snapshot', ({ icon }) => {
-      const { baseElement } = render(<MYIcon id={icon} icon={icon} height={'32px'} width={'32px'} />);
+      const { baseElement } = render(<MyImage id={icon} icon={icon} height={'32px'} width={'32px'} />);
       expect(baseElement).toMatchSnapshot();
     });
 });
