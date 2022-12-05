@@ -93,7 +93,7 @@ fs.writeFile(
   `/*
     !!!! DO NOT MODIFY THIS FILE MANUALLY !!!!
     and-t icons should be linked directly
-    if you need to add a custom icon, place it under "/task/svg-src/" folder and run "svg-tsx" command
+    if you need to add a custom icon, place it under "${ICONS_SOURCE_DIR}" folder and run this command
     !!!! THANK YOU !!!!
 */
 import React, { Suspense } from 'react';
