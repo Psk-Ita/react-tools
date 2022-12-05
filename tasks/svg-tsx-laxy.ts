@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 
-const ICONS_SOURCE_DIR = 'tasks/svg-src';
-const COMPONENTS_DIR = 'src/components/shared/images';
+const ICONS_SOURCE_DIR = 'tasks/src-svg';
+const COMPONENTS_DIR = 'src/images';
 
 const _options = [];
 const _exports = [];
