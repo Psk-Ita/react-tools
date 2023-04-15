@@ -83,7 +83,7 @@ icons.forEach(icon => {
     THEN RUN npm run image-lib COMMAND
 ****************************************************************************************/
         import React from 'react'; export const ${componentName}: React.FC = (props: React.SVGProps<SVGSVGElement>) => (
-            <span role="img" aria-label="${rawName}" className="cnhicon cnhicon-${rawName}">
+            <span role="img" aria-label="${rawName}" className="my-icon my-icon-${rawName}">
                 ${componentCode}
             </span>
         );`,
@@ -107,7 +107,7 @@ images.forEach(image => {
     THEN RUN npm run image-lib COMMAND
 ****************************************************************************************/
        import React from 'react'; export const ${componentName}: React.FC<React.SVGProps<HTMLImageElement>> = (props) => (
-            <span role="img" aria-label="${rawName}" className="cnhicon cnhicon-${rawName}">
+            <span role="img" aria-label="${rawName}" className="my-icon my-icon-${rawName}">
                 ${componentCode}
             </span>
         );`,
