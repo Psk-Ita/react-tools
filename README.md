@@ -1,19 +1,21 @@
 # react-tools sample project
 
-### tasks
- contains scripts to create a custom images-based asset
- 
- imageLib -> generates a switch based image-factory
- 
- imageLibLazy -> same as before, with lazy-loading approach
+<br />
+tasks contains scripts to create a custom images-based asset
 
+- ### tasks
 
-
-### hooks
-  contains some useful custom hooks
-
-  useClickAway
+  - imageLib -> generates a switch based image-factory
   
-  usePrevious
+  - imageLibLazy -> same as before, with lazy-loading approach
+
+<br />
+hooks contains some useful custom hooks
+
+- ### hooks
+
+  - useClickAway
   
-  useWebFont
+  - usePrevious
+  
+  - useWebFont
