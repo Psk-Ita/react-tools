@@ -47,14 +47,17 @@ to make it easily customizable, at the begin of the scripts the following variab
     `ICONS_SOURCE_DIR` -> source fodler containing images (outside /src)
 
 #### What is the "pro" using this module?
+- performances: browser does not require any external images at runtime, all channels could be dedicated to api
+- security: no images will be published, no-one else could stolen you images
 
-my idea was to have a kind of "image-factory" that depending on the input-key, it automatically renders a different image:
-
-- it also generates a test, for each entry of the enum
+#### cons
+- build size increase
+    - consider to assetize only icons and other small images 
+    - always prefer svg when possible
 
 ##### pre-requisites
 
-- fs, path, glob and prettier required (as dev-pedendencies)
+- fs, path, glob and prettier (as dev-pedendencies)
 - COMPONENTS_DIR folder should be created before running the script
 
 #### sample images
