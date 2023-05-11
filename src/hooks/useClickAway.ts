@@ -1,8 +1,8 @@
 import { RefObject, useEffect } from "react";
 
 export interface ClickAwayHooksProps {
-  refElement : RefObject<any>; 
-  onClickAway: (ev: Event) => void
+  refElement: RefObject<any>;
+  onClickAway: (ev: Event) => void;
 }
 
 export const useClickAwayHooks = ({

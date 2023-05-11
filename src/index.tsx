@@ -21,21 +21,20 @@ const divStyle: CSSProperties = {
 
 const fieldsetStyle: CSSProperties = {
   border: "1px solid gainsboro",
-  borderRadius: "16px"
+  borderRadius: "16px",
 };
 
 const divImage: CSSProperties = {
-  border: '.5px dotted gainsboro',
-  padding:"1%",
-  borderTop:'none',
-  borderLeft:'none',
-  borderRadius: '8px',
+  border: ".5px dotted gainsboro",
+  padding: "1%",
+  borderTop: "none",
+  borderLeft: "none",
+  borderRadius: "8px",
 };
-
 
 const App: React.FC = () => {
   const [lazy, setLazy] = useState(false);
-  
+
   const renderImages = (): JSX.Element => {
     const keys = Object.keys(lazy ? MyLazyImagesEnum : MyImagesEnum);
     return (
@@ -43,7 +42,8 @@ const App: React.FC = () => {
         <label>http status images</label>
         <fieldset style={fieldsetStyle}>
           <legend>
-            licensed&nbsp;as&nbsp;"Creative Commons Attribution 4.0 International License"&nbsp;by&nbsp;
+            licensed&nbsp;as&nbsp;"Creative Commons Attribution 4.0
+            International License"&nbsp;by&nbsp;
             <a href="https://www.drlinkcheck.com/blog/free-http-error-images">
               Dr. Link Check
             </a>
@@ -60,12 +60,12 @@ const App: React.FC = () => {
                   {lazy ? (
                     <MyLazyImage
                       imageId={MyLazyImagesEnum[key]}
-                      style={{ width: "100%", height:"300px" }}
+                      style={{ width: "100%", height: "300px" }}
                     />
                   ) : (
                     <MyImage
                       imageId={MyImagesEnum[key]}
-                      style={{ width: "100%", height:"300px" }}
+                      style={{ width: "100%", height: "300px" }}
                     />
                   )}
                 </div>
@@ -79,12 +79,21 @@ const App: React.FC = () => {
             {keys
               .filter((x) => !x.match(/^http/gim))
               .map((key) => (
-                <div key={`${lazy ? "l" : "s"}-${key}`} style={{...divImage, maxWidth:'22%'}}>
-                  <div>{key}</div>                  
+                <div
+                  key={`${lazy ? "l" : "s"}-${key}`}
+                  style={{ ...divImage, maxWidth: "22%" }}
+                >
+                  <div>{key}</div>
                   {lazy ? (
-                    <MyLazyImage imageId={MyLazyImagesEnum[key]} style={{width:"100%"}}/>
+                    <MyLazyImage
+                      imageId={MyLazyImagesEnum[key]}
+                      style={{ width: "100%" }}
+                    />
                   ) : (
-                    <MyImage imageId={MyImagesEnum[key]} style={{width:"100%"}}/>
+                    <MyImage
+                      imageId={MyImagesEnum[key]}
+                      style={{ width: "100%" }}
+                    />
                   )}
                 </div>
               ))}
