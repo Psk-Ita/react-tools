@@ -12,9 +12,9 @@ export const spinOut = (value: number, options: number[]): number[] => {
 
   for (var i = 0; i < lst.length; i++) {
     // for duplicated values, avoid computation if already failed
-    while (i > 0 && i < lst.length && lst[i] === lst[i - 1]) {
-      i++;
-    }
+    // while (i > 0 && i < lst.length && lst[i] === lst[i - 1]) {
+    //  i++;
+    // }
     const opt = lst.splice(i, 1)[0];
     const nextV = value - opt;
     if (nextV === 0) {
