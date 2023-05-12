@@ -7,6 +7,16 @@ const cssClassName = "my-image";
 const ICONS_SOURCE_DIR = "tasks/image-lib";
 const COMPONENTS_DIR = "src/components/My-Images";
 
+try {
+    if (fs.existsSync(COMPONENTS_DIR)) {
+        glob.sync(`${COMPONENTS_DIR}/**.tsx`).map(fs.unlinkSync)
+    } else {
+        fs.mkdirSync(COMPONENTS_DIR);
+    }
+} catch (err) {
+    console.error(err);
+}
+
 const images = glob.sync(`${ICONS_SOURCE_DIR}/**.+(png|jpeg|jpg|webp)`);
 const svgfiles = glob.sync(`${ICONS_SOURCE_DIR}/**.svg`);
 
